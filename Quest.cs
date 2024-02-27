@@ -56,6 +56,7 @@ public class Quest
     {
         // Kill rats in the alchemist’s garden (P)
         // Killing three rats will complete the quest and give +3 dmg strength potion
+        Console.WriteLine("")
         Console.WriteLine("Quest: Kill three rats in the alchemist's garden.");
         // insert more dialogue later
 
@@ -85,6 +86,11 @@ public class Quest
     {
         Console.WriteLine("You enter the spiders liar. A chill goes down your spine.");
         // more dialogue
+        Console.WriteLine("Something rustles behind you. You freeze.");
+        Console.WriteLine("You feel something brush against your leg. You swallow, hard.");
+        Console.WriteLine("You carefully turn around, only to find 24 eyes staring back at you.");
+        Console.WriteLine("One spider as large as a horsecart, two the size of a hog. Its minions, you assume.");
+        Console.WriteLine("The spiders hiss, and start crawling towards you at high speeds, mandibles snapping.");
         Console.WriteLine("Quest: Kill the three spiders in the spider's liar.");
 
         SpiderDeathCounter = 0;
@@ -96,15 +102,17 @@ public class Quest
 
             if (SpiderDeathCounter == 3)
             {
-                Console.WriteLine("Quest completed: Kill three rats in the alchemist's garden.");
-                Console.WriteLine("Item Obtained: Strength Potion.");
-                Console.WriteLine("Downing the potion, you instantly feel more powerful.");
-                Console.WriteLine("You feel like you could do more damage to monsters around you.");
+                Console.WriteLine("You've won. Panting, you look down on the beasts.");
+                Console.WriteLine("Their mangled bodies look disgusting, but the threat is over.");
+                Console.WriteLine("The townspeople will be free to enjoy their days once again.");
+                Console.WriteLine("Quest completed: Kill the three spiders in the spider's liar.");
+                Console.WriteLine("Thank you for playing!");
+                Program.Exit();
             } 
 
             else if (SpiderDeathCounter <= 3)
             {
-                Console.WriteLine($"{SpiderDeathCounter} out of 3 rats have been killed.");
+                Console.WriteLine($"{SpiderDeathCounter} out of 3 spiders have been killed.");
             }
     }
 }
