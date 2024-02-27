@@ -1,16 +1,13 @@
 ﻿class Player
 {
-    public int CurrentHitPoints;
-    public string CurrentLocation; //location object of string?
-    public string CurrentWeapon; //weapon object of string?
+    public int CurrentHitPoints = 0;
+    public string CurrentLocation = null; //location object of string?
+    public string CurrentWeapon = null; //weapon object of string?
     public const int MaximumHitPoints = 5;
-    public string Name;
+    public readonly string Name;
 
-    public Player(int CurrentHitPoints, string CurrentLocation, string CurrentWeapon, string Name)
+    public Player(string Name)
     {
-        this.CurrentHitPoints = CurrentHitPoints;
-        this.CurrentLocation = CurrentLocation;
-        this.CurrentWeapon = CurrentWeapon;
         this.Name = Name;
     }
 }
