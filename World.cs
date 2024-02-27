@@ -17,7 +17,6 @@ public static class World
     public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
     public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
     public const int QUEST_ID_COLLECT_SPIDER_SILK = 3;
-    public const int QUEST_ID_CLEAR_GUARD = 4;
 
     public const int LOCATION_ID_HOME = 1;
     public const int LOCATION_ID_TOWN_SQUARE = 2;
@@ -69,6 +68,7 @@ public static class World
                 "Kill rats in the alchemist's garden ");
 
 
+
         Quest clearFarmersField =
             new Quest(
                 QUEST_ID_CLEAR_FARMERS_FIELD,
@@ -83,17 +83,9 @@ public static class World
                         "Kill spiders in the spider forest");
 
 
-        Quest clearGuard =
-                    new Quest(
-                        QUEST_ID_CLEAR_GUARD,
-                        "clear the guards post",
-                        "Listen to the guard");
-
-
         Quests.Add(clearAlchemistGarden);
         Quests.Add(clearFarmersField);
         Quests.Add(clearSpidersForest);
-        Quests.Add(clearGuard);
     }
 
     public static void PopulateLocations()
@@ -116,7 +108,6 @@ public static class World
         farmersField.MonsterLivingHere = MonsterByID(MONSTER_ID_SNAKE);
 
         Location guardPost = new Location(LOCATION_ID_GUARD_POST, "Guard post", "There is a large, tough-looking guard here.", null, null);
-        guardPost.QuestAvailableHere = QuestByID(QUEST_ID_CLEAR_GUARD);
 
         Location bridge = new Location(LOCATION_ID_BRIDGE, "Bridge", "A stone bridge crosses a wide river.", null, null);
         bridge.QuestAvailableHere = QuestByID(QUEST_ID_COLLECT_SPIDER_SILK);

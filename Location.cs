@@ -1,4 +1,4 @@
-public class Location
+publicclass Location
 {
     public int ID;
     public string Name;
