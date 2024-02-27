@@ -17,3 +17,4 @@ class Monster
         this.MaximumHitPoints = MaxHP;
     }
 }
+
