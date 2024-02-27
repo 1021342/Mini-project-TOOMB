@@ -9,7 +9,7 @@ public class Quest
     
     public string Name;
 
-    public Quest(string description, int id, string name)
+    public Quest(int id, string description, string name)
     {
         this.Description = description;
         this.ID = id;
