@@ -1,4 +1,4 @@
-﻿class Player
+﻿public class Player
 {
     public int CurrentHitPoints = 0;
     public string CurrentLocation = null; //location object of string?
