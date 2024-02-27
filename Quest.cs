@@ -9,6 +9,8 @@ public class Quest
     
     public string Name;
 
+    QuestCounter = 0;
+
     public Quest(int id, string description, string name)
     {
         this.Description = description;
@@ -44,6 +46,7 @@ public class Quest
                 Console.WriteLine("You thank him, and say you'll be on your way.");
                 Console.WriteLine("Quest completed: Kill three snakes in the farmer's field.");
                 Console.WriteLine("Item Obtained: Wooden Shield.");
+                QuestCounter += 1
             }
             else if (SnakeDeathCounter <= 3)
             {
@@ -73,6 +76,7 @@ public class Quest
                 Console.WriteLine("Item Obtained: Strength Potion.");
                 Console.WriteLine("Downing the potion, you instantly feel more powerful.");
                 Console.WriteLine("You feel like you could do more damage to monsters around you.");
+                QuestCounter += 1
             } 
 
             else if (RatDeathCounter <= 3)
@@ -114,5 +118,11 @@ public class Quest
             {
                 Console.WriteLine($"{SpiderDeathCounter} out of 3 spiders have been killed.");
             }
+    }
+
+    public static void GuardQuest()
+    // get past the guard when you have two quests done
+    {
+
     }
 }
