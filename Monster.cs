@@ -4,11 +4,11 @@ public class Monster
 {
     public int ID;
     public string Name;
-    public float MaximumDamage;
+    public int MaximumDamage;
     public float CurrentHitPoints;
     public float MaximumHitPoints;
 
-    public Monster(int id, string name, float MaxD, float CurrHP, float MaxHP)
+    public Monster(int id, string name, int MaxD, float CurrHP, float MaxHP)
     {
         this.ID = id;
         this.Name = name;

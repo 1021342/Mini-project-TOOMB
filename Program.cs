@@ -1,24 +1,47 @@
-﻿class Program
+﻿using System.Security.Cryptography.X509Certificates;
+
+class Program
 {
+    public static bool game = true;
+
     public static void Main()
     {
+        
         //GAME SETUP
         Console.WriteLine("Enter your name:");
         string PlayerName = Console.ReadLine();
 
-        Player player = new Player(PlayerName);
-        player.CurrentLocation = World.Locations[0];
-        player.CurrentWeapon = World.Weapons[0];
+        Player player = new Player(PlayerName, World.Locations[0], World.Weapons[0]);
+
+        Console.WriteLine(new string('#', 30));
+        Console.WriteLine("       Welcome to TOOMB");
+        Console.WriteLine(new string('#', 30));
+        Console.WriteLine("\nThe people in your town are being terrorized by giant spiders. You decide to do what you can to help.\n");
+        Compass();
 
         //GAME RUNNING LOOP
-        while (true)
+        while (game == true)
         {
-            Console.WriteLine(new string('#', 30));
-            Console.WriteLine("       Welcome to TOOMB");
-            Console.WriteLine(new string('#', 30));
-            Console.WriteLine("\nThe people in your town are being terrorized by giant spiders. You decide to do what you can to help.");
+            MainMenu();
 
-            Move(Compas());
+            //Checks for available quest and activates it
+            Quest AvailableQuest = player.CurrentLocation.QuestAvailableHere;
+            if (AvailableQuest != null)
+            {
+                SuperAdventure adventure = new SuperAdventure(World.Monsters[AvailableQuest.ID - 1], player);
+                adventure.CurrentQuest(AvailableQuest);
+            }
+            else if (player.CurrentLocation.ID == 3 && Quest.QuestCounter != 2)
+            {
+                SuperAdventure adventure = new SuperAdventure(null, player);
+                adventure.ActivateDialogueGuard();
+                player.CurrentLocation.ID = 2;
+            }
+
+            if (Quest.QuestCounter == 3)
+            {
+                game = Loop.Exit("won");
+            }
         }
 
 // OTHER METHODS
@@ -53,11 +76,12 @@
             return null;
         }
 
-        //REQUEST COMPASS
-        string Compas()
+        // COMPASS
+        void Compass()
         {
-            string PossibleDirections = Directions(player);
             Console.WriteLine($""" 
+
+===== Compass =====
 You are here: {player.CurrentLocation.Name}
   P
   A
@@ -74,36 +98,81 @@ G: Guard post
 B: Bridge
 S: Spider forest
 
-From your current location you can go: {PossibleDirections}
-Where do you want to go?
 """);
-            // ASK WHERE YOU WANT TO GO
-            while (true)
-            {
-                string direction = Console.ReadLine().ToUpper();
-                if (PossibleDirections.Contains(direction))
-                {
-                    return direction;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid direction");
-                }
-            }
         }
 
         // MOVE TO THE NEW DIRECTION
-        void Move(string direction)
+        void Move()
         {
-            //switch statement --> als je noord kiest, ga je naar player.CurrentLocation.LocationToNorth etc.
-            switch (direction)
+            string PossibleDirections = Directions(player);
+
+            while (true)
             {
-                case "N": player.CurrentLocation = player.CurrentLocation.LocationToNorth; break;
-                case "E": player.CurrentLocation = player.CurrentLocation.LocationToEast; break;
-                case "S": player.CurrentLocation = player.CurrentLocation.LocationToSouth; break;
-                case "W": player.CurrentLocation = player.CurrentLocation.LocationToWest; break;
-                default: Console.WriteLine("Invalid direction"); break;
+                Console.WriteLine("Where do you want to go?");
+                Console.WriteLine($"From your current location you can go: {Directions(player)}");
+                string direction = Console.ReadLine().ToUpper();
+
+                if (PossibleDirections.Contains(direction) && direction.Length == 1)
+                {
+                    switch (direction)
+                    {
+                        case "N": player.CurrentLocation = player.CurrentLocation.LocationToNorth; break;
+                        case "E": player.CurrentLocation = player.CurrentLocation.LocationToEast; break;
+                        case "S": player.CurrentLocation = player.CurrentLocation.LocationToSouth; break;
+                        case "W": player.CurrentLocation = player.CurrentLocation.LocationToWest; break;
+                        default: Console.WriteLine("Invalid direction"); break;
+                    }
+                    break;
+                }
+            }
+            Console.WriteLine($"You are now here: {player.CurrentLocation.Name}");
+        }
+
+        
+
+        // MAIN MENU
+        void MainMenu()
+        {
+            Console.WriteLine("""
+
+===== Main menu =====
+What do you want to do?
+
+C: See the map
+M: Move somewhere else
+I: See inventory
+Q: Quit the game
+
+""");
+            string choice = Console.ReadLine().ToUpper();
+            if (choice == "C")
+            {
+                Compass();
+            }
+            else if (choice == "M")
+            {
+                Move();
+            }
+            else if (choice == "I")
+            {
+                if (player.Inventory.Count == 0)
+                {
+                    Console.WriteLine("You don't have any items.");
+                }
+                else
+                {
+                    foreach (string item in player.Inventory)
+                    {
+                        Console.WriteLine("item");
+                    }
+                }
+            }
+            else if (choice == "Q")
+            {
+                game = Loop.Exit("quit");
             }
         }
+
+    // END  OF MAIN!
     }
 }
