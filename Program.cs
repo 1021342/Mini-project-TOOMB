@@ -175,4 +175,28 @@ Q: Quit the game
 
     // END  OF MAIN!
     }
+    // public static bool Crit_Calculator(int plyrlevel)
+    // {
+    //     float critChance = 0.0f;
+    //     if (plyrlevel == 1)
+    //     {
+    //         critChance = 0.05f; // 5%
+    //     }
+    //     else if (plyrlevel == 2)
+    //     {
+    //         critChance = 0.1f; // 10%
+    //     }
+    //     else if (plyrlevel == 3)
+    //     {
+    //         critChance = 0.15f; // 15%
+    //     }
+    //     else
+    //     {
+    //         critChance = 0.2f; // 20% for levels 4 and above
+    //     }
+
+    //     float randValue = (float)new Random().NextDouble();
+    //     // this can return either true or false; true = crit success, false = crit failed
+    //     return randValue < critChance;
+    // }
 }
